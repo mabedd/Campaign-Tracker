@@ -1,10 +1,27 @@
-import CampaignList from "../components/CampaignList";
+import Navbar from "../components/Navbar";
+import HeroSection from "../components/Hero";
+import OrganizationsSection from "../components/Clients";
+import RecentCampaignsSection from "../components/RecentCampaigns";
+import StatsSection from "../components/Stats";
+import ProcessSection from "../components/Process";
+import HelpingSection from "../components/Helping";
+import Footer from "../components/Footer";
 
-const Home = () => (
-  <div>
-    <h1 className="text-2xl font-bold">Campaigns</h1>
-    <CampaignList />
-  </div>
-);
+const HomePage = () => {
+  return (
+    <div className="min-h-screen bg-white text-gray-800">
+      <Navbar />
+      <main>
+        <HeroSection />
+        <OrganizationsSection />
+        <RecentCampaignsSection />
+        <StatsSection />
+        <ProcessSection />
+        <HelpingSection />
+      </main>
+      <Footer />
+    </div>
+  );
+};
 
-export default Home;
+export default HomePage;

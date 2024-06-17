@@ -4,8 +4,8 @@
 
 body,
 html {
-  height: 100%;
-  overflow: hidden; /* Disable scrolling */
+  height: auto;
+  overflow: auto;
 }
 
 body {

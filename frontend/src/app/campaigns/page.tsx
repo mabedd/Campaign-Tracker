@@ -1,12 +1,12 @@
+import React from "react";
 import CampaignList from "../../components/CampaignList";
 
-const Campaigns = () => (
-  <div>
-    <h1 className="text-2xl font-bold text-primary dark:text-dark-text">
-      All Campaigns
-    </h1>
-    <CampaignList />
-  </div>
-);
+const CampaignsPage = () => {
+  return (
+    <div className="min-h-screen bg-gradient-to-r from-black via-gray-900 to-black text-white">
+      <CampaignList />
+    </div>
+  );
+};
 
-export default Campaigns;
+export default CampaignsPage;

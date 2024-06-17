@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import axios from "axios";
+import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
+import { loginUser, LoginResponse } from "../../services/api";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -11,71 +12,81 @@ const Login = () => {
   });
   const router = useRouter();
 
-  const { email, password } = formData;
+  const mutation = useMutation<
+    LoginResponse,
+    Error,
+    { email: string; password: string }
+  >(loginUser, {
+    onSuccess: (data: any) => {
+      localStorage.setItem("token", data.token);
+      router.push("/");
+    },
+    onError: (error: any) => {
+      console.error(error);
+    },
+  });
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const onSubmit = async (e: React.FormEvent) => {
+  const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-      const res = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/auth/login`,
-        formData
-      );
-      localStorage.setItem("token", res.data.token);
-      router.push("/");
-    } catch (err) {
-      console.error(err);
-    }
+    mutation.mutate(formData);
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10 p-6 bg-white dark:bg-dark-foreground rounded shadow-md">
-      <h2 className="text-2xl font-bold mb-6 text-primary dark:text-dark-text">
-        Login
-      </h2>
-      <form onSubmit={onSubmit}>
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 dark:text-dark-text mb-2"
-            htmlFor="email"
-          >
-            Email
-          </label>
-          <input
-            type="email"
-            name="email"
-            value={email}
-            onChange={onChange}
-            required
-            className="w-full p-2 border border-gray-300 dark:border-dark-foreground rounded dark:bg-dark-foreground dark:text-dark-text"
-          />
-        </div>
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 dark:text-dark-text mb-2"
-            htmlFor="password"
-          >
-            Password
-          </label>
-          <input
-            type="password"
-            name="password"
-            value={password}
-            onChange={onChange}
-            required
-            className="w-full p-2 border border-gray-300 dark:border-dark-foreground rounded dark:bg-dark-foreground dark:text-dark-text"
-          />
-        </div>
-        <button
-          type="submit"
-          className="w-full bg-primary text-white p-2 rounded dark:bg-dark-foreground"
+    <div className="flex min-h-screen">
+      <div
+        className="w-1/2 bg-cover bg-center"
+        style={{
+          backgroundImage: "url(https://source.unsplash.com/1600x900/?login)",
+        }}
+      ></div>
+      <div className="w-1/2 flex items-center justify-center bg-gray-100">
+        <form
+          className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md"
+          onSubmit={onSubmit}
         >
-          Login
-        </button>
-      </form>
+          <h2 className="text-3xl font-bold mb-6 text-center text-emerald-500">
+            Login
+          </h2>
+          <div className="mb-4">
+            <label className="block text-gray-700 mb-2" htmlFor="email">
+              Email
+            </label>
+            <input
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-emerald-500"
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={onChange}
+              required
+            />
+          </div>
+          <div className="mb-6">
+            <label className="block text-gray-700 mb-2" htmlFor="password">
+              Password
+            </label>
+            <input
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-emerald-500"
+              type="password"
+              id="password"
+              name="password"
+              value={formData.password}
+              onChange={onChange}
+              required
+            />
+          </div>
+          <button
+            className="w-full bg-emerald-500 text-white py-2 rounded-lg hover:bg-emerald-600 transition duration-300"
+            type="submit"
+          >
+            Login
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
