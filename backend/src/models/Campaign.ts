@@ -5,6 +5,8 @@ export interface ICampaign extends Document {
   description: string;
   goal: number;
   duration: number;
+  image: string;
+  raised: number;
 }
 
 const CampaignSchema: Schema = new Schema({
@@ -12,6 +14,8 @@ const CampaignSchema: Schema = new Schema({
   description: { type: String, required: true },
   goal: { type: Number, required: true },
   duration: { type: Number, required: true },
+  image: { type: String, required: true },
+  raised: { type: Number, default: 0 }, // Add raised field to schema
 });
 
 export default mongoose.model<ICampaign>("Campaign", CampaignSchema);

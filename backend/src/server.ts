@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import cors from "cors";
 
 import authRoutes from "./routes/auth";
 import campaignRoutes from "./routes/campaign";
@@ -11,6 +12,13 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5001;
+
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 app.use("/api/auth", authRoutes);

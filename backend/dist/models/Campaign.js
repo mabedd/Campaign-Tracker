@@ -29,5 +29,7 @@ const CampaignSchema = new mongoose_1.Schema({
     description: { type: String, required: true },
     goal: { type: Number, required: true },
     duration: { type: Number, required: true },
+    image: { type: String, required: true },
+    raised: { type: Number, default: 0 }, // Add raised field to schema
 });
 exports.default = mongoose_1.default.model("Campaign", CampaignSchema);

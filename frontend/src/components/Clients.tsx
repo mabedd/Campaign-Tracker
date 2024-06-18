@@ -5,22 +5,22 @@ const OrganizationsSection = () => (
     </h2>
     <div className="flex justify-center space-x-8">
       <img
-        src="https://via.placeholder.com/150"
+        src="/imgs/logos/amazon.png"
         alt="Company 1"
         className="h-12 grayscale"
       />
       <img
-        src="https://via.placeholder.com/150"
+        src="/imgs/logos/meta.png"
         alt="Company 2"
         className="h-12 grayscale"
       />
       <img
-        src="https://via.placeholder.com/150"
+        src="/imgs/logos/netflix.png"
         alt="Company 3"
         className="h-12 grayscale"
       />
       <img
-        src="https://via.placeholder.com/150"
+        src="/imgs/logos/toyota.png"
         alt="Company 4"
         className="h-12 grayscale"
       />

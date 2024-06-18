@@ -2,9 +2,16 @@ import { Request, Response } from "express";
 import Campaign, { ICampaign } from "../models/Campaign";
 
 export const createCampaign = async (req: Request, res: Response) => {
-  const { title, description, goal, duration } = req.body;
+  const { title, description, goal, duration, image, raised } = req.body;
   try {
-    const campaign = new Campaign({ title, description, goal, duration });
+    const campaign = new Campaign({
+      title,
+      description,
+      goal,
+      duration,
+      image,
+      raised,
+    });
     await campaign.save();
     res.status(201).json(campaign);
   } catch (err) {
@@ -23,11 +30,11 @@ export const getCampaigns = async (req: Request, res: Response) => {
 
 export const updateCampaign = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const { title, description, goal, duration } = req.body;
+  const { title, description, goal, duration, image, raised } = req.body;
   try {
     const campaign = await Campaign.findByIdAndUpdate(
       id,
-      { title, description, goal, duration },
+      { title, description, goal, duration, image, raised },
       { new: true }
     );
     if (!campaign) return res.status(404).json({ msg: "Campaign not found" });

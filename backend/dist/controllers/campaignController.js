@@ -6,9 +6,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteCampaign = exports.updateCampaign = exports.getCampaigns = exports.createCampaign = void 0;
 const Campaign_1 = __importDefault(require("../models/Campaign"));
 const createCampaign = async (req, res) => {
-    const { title, description, goal, duration } = req.body;
+    const { title, description, goal, duration, image, raised } = req.body;
     try {
-        const campaign = new Campaign_1.default({ title, description, goal, duration });
+        const campaign = new Campaign_1.default({
+            title,
+            description,
+            goal,
+            duration,
+            image,
+            raised,
+        });
         await campaign.save();
         res.status(201).json(campaign);
     }
@@ -29,9 +36,9 @@ const getCampaigns = async (req, res) => {
 exports.getCampaigns = getCampaigns;
 const updateCampaign = async (req, res) => {
     const { id } = req.params;
-    const { title, description, goal, duration } = req.body;
+    const { title, description, goal, duration, image, raised } = req.body;
     try {
-        const campaign = await Campaign_1.default.findByIdAndUpdate(id, { title, description, goal, duration }, { new: true });
+        const campaign = await Campaign_1.default.findByIdAndUpdate(id, { title, description, goal, duration, image, raised }, { new: true });
         if (!campaign)
             return res.status(404).json({ msg: "Campaign not found" });
         res.status(200).json(campaign);

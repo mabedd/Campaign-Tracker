@@ -5,16 +5,22 @@ import { motion } from "framer-motion";
 
 const HeroSection = () => {
   return (
-    <div
-      className="relative min-h-screen bg-cover bg-center text-white"
-      style={{ backgroundImage: "url(https://via.placeholder.com/1600x900)" }}
-    >
-      <div className="container mx-auto p-10 flex flex-col items-center justify-center min-h-screen">
+    <div className="relative min-h-screen">
+      <div className="absolute inset-0">
+        <img
+          src="/imgs/hero.jpg"
+          alt="Hero"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black opacity-50"></div>{" "}
+        {/* Overlay */}
+      </div>
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen text-white">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="text-center"
+          className="text-center p-10"
         >
           <h1 className="text-6xl font-extrabold mb-6">
             Make A Big Difference By Small Effort

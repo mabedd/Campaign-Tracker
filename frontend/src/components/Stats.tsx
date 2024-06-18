@@ -1,10 +1,6 @@
 const StatsSection = () => (
   <div className="py-10 flex items-center bg-gray-50">
-    <img
-      src="https://via.placeholder.com/800x600"
-      alt="Stats"
-      className="w-1/2 object-cover"
-    />
+    <img src="/imgs/stats.jpg" alt="Stats" className="w-1/2 object-cover" />
     <div className="w-1/2 text-center p-10">
       <h2 className="text-3xl font-bold mb-4 text-emerald-500">
         When people help people, change happens
